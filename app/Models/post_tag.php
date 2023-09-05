@@ -5,11 +5,11 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Post extends Model {
+class post_tag extends Model
+{
     use HasFactory;
     protected $fillable = [
-        'title',
-        'content',
-        'user_id',
+        'post_id',
+        'tag_id',
     ];
 }
