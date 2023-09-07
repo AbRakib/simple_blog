@@ -27,7 +27,8 @@ Route::middleware( 'auth' )->group( function () {
     Route::get( '/dashboard', [AuthController::class, 'dashboard'] )->name( 'dashboard' );
     Route::get( '/logout', [AuthController::class, 'logout'] )->name( 'logout' );
 
-    Route::get('/tags', [TagController::class, 'index'])->name('tags');
-    Route::post('/tag-store', [TagController::class, 'store'] )->name('tagStore');
+    // tag routes for admin
+    Route::get('/tags', [TagController::class, 'index'])->name('tags'); // show all tags
+    Route::post('/tag-store', [TagController::class, 'store'] )->name('tagStore'); // store tags
 
 } );

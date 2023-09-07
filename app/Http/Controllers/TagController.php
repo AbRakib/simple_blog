@@ -10,7 +10,7 @@ class TagController extends Controller {
      * Display a listing of the resource.
      */
     public function index() {
-        $tags = Tag::latest()->paginate(5);
+        $tags = Tag::latest()->get();
         return view( 'admin.tag.index', compact( 'tags' ) );
     }
 
@@ -25,6 +25,10 @@ class TagController extends Controller {
      * Store a newly created resource in storage.
      */
     public function store( Request $request ) {
+
+        $validated = $request->validate([
+            'name' => 'required|unique:tags|max:20',
+        ]);
 
         $tag = new Tag();
         $tag->name = $request->name;

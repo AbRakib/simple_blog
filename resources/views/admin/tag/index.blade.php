@@ -9,7 +9,7 @@
             <button class="text-center btn btn-info" data-bs-toggle="modal" data-bs-target="#exampleModal">Add Tag</button>
         </div>
     </div>
-    <table class="table table-striped table-bordered">
+    <table class="table table-striped table-bordered" id="example">
         <thead>
             <tr>
                 <th scope="col">#</th>
@@ -43,6 +43,7 @@
         <div class="modal-body">
           <form id="tagForm" method="post">
             @csrf
+            <div class="alert-danger error"></div>
             <div class="form-group">
                 <input type="text" class="form-control border-2" name="name" id="tag" placeholder="Tag Name">
             </div>
@@ -73,7 +74,12 @@
                     console.log(response.success);
                     $(".modal").modal('hide');
                     $(".table").load(location.href+' .table');
-                    $("#tagForm")[0].reset()
+                    $("#tagForm")[0].reset();
+                },
+                error: function (error) {
+                  console.log(error);
+                  $('.error').show();
+                  $('.error').append('<p class="p-2">'+error.responseJSON.message+'</p>');
                 }
             });
         });
