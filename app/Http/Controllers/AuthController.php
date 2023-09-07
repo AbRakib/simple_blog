@@ -16,14 +16,18 @@ class AuthController extends Controller {
         return view( 'auth.register' );
     }
 
+    // dashboard view
+    public function dashboard() {
+        return view('admin.app');
+    }
+
     // check login access
     public function checklogin( Request $request ) {
         $credentials = $request->only( 'email', 'password' );
         if ( Auth::attempt( $credentials ) ) {
             toastr()->addSuccess( 'Your account has been restored.' );
-            return redirect()->route( 'dashboard' );            
+            return redirect()->route( 'dashboard' );
         }
-        
         toastr()->escapeHtml( false )->addError( 'Your Email & Password Wrong!!!' );
         return redirect()->back();
     }
@@ -32,6 +36,6 @@ class AuthController extends Controller {
     public function logout() {
         Auth::logout();
         toastr()->addSuccess( 'Logout Successfully Done!!!' );
-        return redirect()->route('login');
+        return redirect()->route( 'login' );
     }
 }

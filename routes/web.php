@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\AuthController;
+use App\Http\Controllers\TagController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -23,10 +24,10 @@ Route::post( '/check-login', [AuthController::class, 'checklogin'] )->name( 'che
 
 Route::middleware( 'auth' )->group( function () {
 
-    Route::get( '/dashboard', function () {
-        return view( 'admin.app' );
-    } )->name( 'dashboard' );
+    Route::get( '/dashboard', [AuthController::class, 'dashboard'] )->name( 'dashboard' );
+    Route::get( '/logout', [AuthController::class, 'logout'] )->name( 'logout' );
 
-    Route::get('/logout', [AuthController::class, 'logout'])->name('logout');
+    Route::get('/tags', [TagController::class, 'index'])->name('tags');
+    Route::post('/tag-store', [TagController::class, 'store'] )->name('tagStore');
 
 } );
